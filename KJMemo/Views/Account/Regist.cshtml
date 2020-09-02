@@ -1,0 +1,60 @@
+@model KJMemo.Models.DTO.RegistViewModel
+
+@{
+    Layout = "_Layout_Blank";
+}
+
+
+<div class="row">
+    <div class="col-md-4">
+
+    </div>
+    <div class="col-md-4">
+
+
+        <div class="card">
+            <form class="card-body" method="post">
+
+                <h2 class="text-center">KJMemo 회원가입</h2>
+
+                <div class="form-group">
+                    <label for="">Email</label>
+                    <input type="email" asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="">Password</label>
+                    <input type="password" asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="">PasswordConfirm</label>
+                    <input type="password" asp-for="PasswordConfirm" class="form-control" />
+                    <span asp-validation-for="PasswordConfirm" class="text-danger"></span>
+                </div>
+
+
+                <button class="btn btn-primary btn-block mb-2">회원가입</button>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>비밀번호를 잊으셨다면 ? <a href="/Account/PasswordReset">비밀번호 초기화</a> </p>
+                    </div>
+                    <div class="col-md-6">
+                        <p>이미 계정이 있으시면 ? <a href="/Account/Login">로그인</a> </p>
+                    </div>
+                </div>
+                
+            </form>
+        </div>
+        
+
+        
+
+        
+    </div>
+
+    <div class="col-md-4"></div>
+</div>

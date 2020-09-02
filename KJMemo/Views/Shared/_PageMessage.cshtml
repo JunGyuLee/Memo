@@ -1,0 +1,22 @@
+﻿@using KJMemo.Extensions.TempData;
+
+@{
+    var Message = TempData.Get<KJMemo.Models.PageMessageViewModel>(KJMemo.Models.Enums.ETempData.MESSAGE);
+
+    @if (Message != null)
+    {
+
+    <div class="alert @Message.BootstrapClass alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+
+        <strong>@Message.Title</strong>
+        <p>@Message.Text</p>
+        @if (Message.Link != null)
+        {
+            <a href="@Message.Link.Uri" class="alert-link" target="_blank">@Message.Link.Text</a>
+        }
+    </div>
+    }
+}

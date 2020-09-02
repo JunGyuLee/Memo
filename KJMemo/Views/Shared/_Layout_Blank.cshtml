@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - KJMemo</title>
+
+    <link rel="stylesheet" href="~/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/node_modules/sweetalert2/dist/sweetalert2.css">
+    <link rel="stylesheet" href="~/css/site.css" />
+
+</head>
+<body>
+
+    <div class="container-fluid pt-sm-4">
+        
+        <main role="main">
+            
+            @RenderBody()
+        </main>
+
+        <partial name="_PageMessage" />
+    </div>
+
+    <script src="~/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="~/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="~/node_modules/sweetalert2/dist/sweetalert2.js"></script>
+    @RenderSection("Scripts",false)
+</body>
+</html>
