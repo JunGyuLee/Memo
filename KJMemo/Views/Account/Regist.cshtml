@@ -24,6 +24,12 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="">Name</label>
+                    <input type="text" asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
                     <label for="">Password</label>
                     <input type="password" asp-for="Password" class="form-control" />
                     <span asp-validation-for="Password" class="text-danger"></span>
@@ -46,7 +52,7 @@
                         <p>이미 계정이 있으시면 ? <a href="/Account/Login">로그인</a> </p>
                     </div>
                 </div>
-                
+
             </form>
         </div>
         
