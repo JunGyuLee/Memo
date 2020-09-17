@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="~/node_modules/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/node_modules/sweetalert2/dist/sweetalert2.css">
 
-    @RenderSection("css",false)
+    @RenderSection("css", false)
 
     <link rel="stylesheet" href="~/css/site.css" />
-    
+
 </head>
 <body>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
@@ -22,70 +22,71 @@
         @* <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> *@
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
-            <a class="nav-link" href="/">Sign out</a>
+                <a class="nav-link" asp-controller="Account" asp-action="Login">Sign in</a>
+                <a class="nav-link" href="/">Sign out</a>
             </li>
         </ul>
     </nav>
 
 
     <div class="container-fluid">
-        
+
 
         <div class="row">
             <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-            <div class="sidebar-sticky pt-3">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">
-                        <span data-feather="home"></span>
-                            Dashboard <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
-               
-                </ul>
+                <div class="sidebar-sticky pt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                                <span data-feather="home"></span>
+                                Dashboard <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+
+                    </ul>
 
 
-                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                <span>컴포넌트</span>
-                </h6>
-                <ul class="nav flex-column mb-2">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Component/Index">Index</a>
-                    </li>
-               
-                </ul>
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span>컴포넌트</span>
+                    </h6>
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Component/Index">Index</a>
+                        </li>
 
-                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                <span>달력</span>
-                </h6>
-                <ul class="nav flex-column mb-2">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Calendar/Index">Index</a>
-                    </li>
-                </ul>
+                    </ul>
 
-                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                <span>가게부</span>
-                </h6>
-                <ul class="nav flex-column mb-2">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Index</a>
-                    </li>
-               
-                </ul>
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span>달력</span>
+                    </h6>
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Calendar/Index">Index</a>
+                        </li>
+                    </ul>
 
-                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                <span>메모</span>
-                </h6>
-                <ul class="nav flex-column mb-2">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Task/Tasks">미완료</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">삭제됨</a>
-                    </li>
-                </ul>
-            </div>
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span>가계부</span>
+                    </h6>
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Index</a>
+                        </li>
+
+                    </ul>
+
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span>메모</span>
+                    </h6>
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Task/Tasks">미완료</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">삭제됨</a>
+                        </li>
+                    </ul>
+                </div>
             </nav>
 
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
@@ -100,6 +101,6 @@
     <script src="~/node_modules/jquery/dist/jquery.min.js"></script>
     <script src="~/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
     <script src="~/node_modules/sweetalert2/dist/sweetalert2.js"></script>
-    @RenderSection("Scripts",false)
+    @RenderSection("Scripts", false)
 </body>
 </html>
