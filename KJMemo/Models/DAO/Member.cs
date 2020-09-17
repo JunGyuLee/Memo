@@ -24,5 +24,19 @@ namespace KJMemo.Models.DAO
 
         [Required]
         public bool IsValid { get; set; }
+
+        public Member(
+            Guid memberID,
+            string name,
+            string email,
+            string password,
+            bool isValid)
+        {
+            MemberID = memberID;
+            Name = name;
+            Email = email;
+            Password = password;
+            IsValid = isValid;
+        }
     }
 }

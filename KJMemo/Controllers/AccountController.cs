@@ -1,4 +1,3 @@
-
 using KJMemo.Extensions.TempData;
 using KJMemo.Models;
 using KJMemo.Models.DAO;
@@ -7,12 +6,11 @@ using KJMemo.Models.DTO.Account;
 using KJMemo.Models.Enums;
 using KJMemo.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Routing;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace KJMemo.Controllers
 {
@@ -38,13 +36,15 @@ namespace KJMemo.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Login(LoginViewModel vm){
+        public IActionResult Login(LoginViewModel vm)
+        {
 
-            if(!ModelState.IsValid){
+            if (!ModelState.IsValid)
+            {
                 return View(vm);
             }
 
-            TempData.Put(ETempData.MESSAGE, new PageMessageViewModel("환영합니다.","안녕하세요 아무개님.",EMessageType.SUCCESS));
+            TempData.Put(ETempData.MESSAGE, new PageMessageViewModel("환영합니다.", "안녕하세요 아무개님.", EMessageType.SUCCESS));
             return Redirect("/Home/Index");
         }
 
@@ -56,28 +56,25 @@ namespace KJMemo.Controllers
         }
 
         [HttpPost]
-        public IActionResult Regist(RegistViewModel vm){
+        public async Task<IActionResult> RegistAsync(RegistViewModel vm)
+        {
 
-            if(!ModelState.IsValid){
+            if (!ModelState.IsValid)
+            {
                 return View(vm);
             }
 
-            Member member = new Member();
-            member.MemberID = new System.Guid();
-            member.Name = vm.Name;
-            member.Email = vm.Email;
-            member.Password = vm.Password;
-            member.IsValid = true;
+            Member member = new Member(new System.Guid(), vm.Name, vm.Email, vm.Password, true);
 
-            mDbContext.Members.Add(member);
-            mDbContext.SaveChanges();
+            await mDbContext.Members.AddAsync(member);
+            await mDbContext.SaveChangesAsync();
 
             List<string> emails = new List<string>();
             emails.Add(vm.Email);
 
-            mEmailSender.SendEmailAsync(emails, "회원 인증", "회원가입을 해주셔서 감사합니다.");
+            await mEmailSender.SendEmailAsync(emails, "회원 인증", "회원가입을 해주셔서 감사합니다.");
 
-            TempData.Put(ETempData.MESSAGE, new PageMessageViewModel("회원가입 완료","로그인 해주세요.",EMessageType.SUCCESS));
+            TempData.Put(ETempData.MESSAGE, new PageMessageViewModel("회원가입 완료", "로그인 해주세요.", EMessageType.SUCCESS));
 
 
             return Redirect("Login");
@@ -107,40 +104,41 @@ namespace KJMemo.Controllers
         }
 
         [HttpPost]
-        public IActionResult PasswordReset(PasswordResetViewModel vm)
-        { 
+        public async Task<IActionResult> PasswordResetAsync(PasswordResetViewModel vm)
+        {
 
-            if(!ModelState.IsValid){
+            if (!ModelState.IsValid)
+            {
                 return View(vm);
             }
 
             List<string> emails = new List<string>();
             emails.Add(vm.Email);
 
-            Member member = mDbContext.Members.Where(m => m.Email == vm.Email).FirstOrDefault();
-           
-            mEmailSender.SendEmailAsync(emails, "비밀번호를 재설정해주세요.", $"<a>https://localhost:44398/Account/PasswordSetting?email={member.Email}<a>");
+            Member member = await mDbContext.Members.FirstOrDefaultAsync(m => m.Email == vm.Email);
+
+            await mEmailSender.SendEmailAsync(emails, "비밀번호를 재설정해주세요.", $"<a href='https://localhost:44398/Account/PasswordSetting?email={member.Email}'>비밀번호 재설정</a>");
 
             return RedirectToAction("Login");
         }
 
-        public IActionResult PasswordSetting([FromQuery]string email)
+        public IActionResult PasswordSettingAsync([FromQuery]string email)
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult PasswordSetting(PasswordSettingViewModel viewModel)
+        public async Task<IActionResult> PasswordSettingAsync(PasswordSettingViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
                 return View(viewModel);
             }
 
-            Member member = mDbContext.Members.Where(m => m.Email == viewModel.Email).FirstOrDefault();
+            Member member = await mDbContext.Members.FirstOrDefaultAsync(m => m.Email == viewModel.Email);
 
             member.Password = viewModel.Password;
-            mDbContext.SaveChangesAsync();
+            await mDbContext.SaveChangesAsync();
 
             return RedirectToAction("Login");
         }
